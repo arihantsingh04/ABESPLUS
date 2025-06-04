@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Portal - Login</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="glass-header">
+    <h1>College Portal</h1>
+    <button id="themeToggle" class="theme-toggle">🌙</button>
+  </header>
+  <div class="container">
+    <div class="card glass-card login-card">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+      <div id="error" class="error-alert"></div>
+      <div id="loading" class="spinner hidden"></div>
+    </div>
+  </div>
+  <script src="scripts.js"></script>
+</body>
+</html>

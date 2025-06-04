@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Portal - Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="glass-header">
+    <h1>College Portal Dashboard</h1>
+    <div class="header-actions">
+      <button onclick="logout()" class="btn btn-danger">Logout</button>
+      <button id="themeToggle" class="theme-toggle">🌙</button>
+    </div>
+  </header>
+  <div class="container">
+    <div class="card glass-card student-card">
+      <div class="student-header">
+        <div class="avatar"></div>
+        <h2>Student Details</h2>
+      </div>
+      <div id="studentDetails"></div>
+    </div>
+    <div class="card glass-card">
+      <h2>Attendance Overview</h2>
+      <div id="attendanceSummary" class="loading">Loading...</div>
+    </div>
+    <div class="card glass-card">
+      <h2>Detailed Attendance</h2>
+      <div id="detailedAttendance" class="loading"></div>
+    </div>
+    <div class="card glass-card">
+      <h2>Quiz Results</h2>
+      <div id="quizResults" class="loading">Loading...</div>
+    </div>
+    <div id="error" class="error-alert"></div>
+    <div id="loading" class="spinner hidden"></div>
+  </div>
+  <script src="scripts.js"></script>
+</body>
+</html>
