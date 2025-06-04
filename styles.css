@@ -1,25 +1,25 @@
 :root {
-  --bg-gradient: linear-gradient(135deg, #a8edea, #fed6e3);
-  --card-bg: rgba(255, 255, 255, 0.85);
-  --text-color: #2c3e50;
-  --primary-color: #00c4b4;
-  --primary-gradient: linear-gradient(90deg, #00c4b4, #7bed9f);
-  --danger-gradient: linear-gradient(90deg, #ff6b6b, #ff8e53);
-  --shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  --bg-gradient: linear-gradient(135deg, #CAF0F8, #90E0EF);
+  --card-bg: rgba(202, 240, 248, 0.85); /* #CAF0F8 */
+  --text-color: #03045E;
+  --primary-color: #00B4D8;
+  --primary-gradient: linear-gradient(90deg, #0077B6, #00B4D8);
+  --danger-gradient: linear-gradient(90deg, #03045E, #0077B6);
+  --shadow: 0 6px 12px rgba(3, 4, 94, 0.15); /* #03045E */
   --border-radius: 16px;
   --glass-blur: blur(12px);
-  --progress-gradient: linear-gradient(90deg, #ff6b6b, #00c4b4);
+  --progress-gradient: linear-gradient(90deg, #0077B6, #00B4D8);
 }
 
 [data-theme="dark"] {
-  --bg-gradient: linear-gradient(135deg, #2c3e50, #1a1a1a);
-  --card-bg: rgba(40, 40, 40, 0.85);
-  --text-color: #ecf0f1;
-  --primary-color: #55efc4;
-  --primary-gradient: linear-gradient(90deg, #55efc4, #a29bfe);
-  --danger-gradient: linear-gradient(90deg, #d63031, #e17055);
+  --bg-gradient: linear-gradient(135deg, #03045E, #0077B6);
+  --card-bg: rgba(3, 4, 94, 0.85); /* #03045E */
+  --text-color: #CAF0F8;
+  --primary-color: #90E0EF;
+  --primary-gradient: linear-gradient(90deg, #00B4D8, #90E0EF);
+  --danger-gradient: linear-gradient(90deg, #0077B6, #00B4D8);
   --shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-  --progress-gradient: linear-gradient(90deg, #e17055, #55efc4);
+  --progress-gradient: linear-gradient(90deg, #00B4D8, #90E0EF);
 }
 
 * {
@@ -75,7 +75,7 @@ body {
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(3, 4, 94, 0.2);
 }
 
 @keyframes slideIn {
@@ -93,16 +93,33 @@ body {
   margin-bottom: 1rem;
 }
 
-.student-card .avatar {
-  width: 50px;
-  height: 50px;
-  background: url('https://via.placeholder.com/50') center/cover;
+.student-card .profile-pic {
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #CAF0F8;
+  box-shadow: 0 2px 4px rgba(3, 4, 94, 0.1);
 }
 
-.student-card p {
-  margin: 0.5rem 0;
+.student-card .student-details {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.75rem 1rem;
   font-size: 1rem;
+  min-height: 100px;
+  padding: 0.5rem;
+}
+
+.student-card .student-details strong {
+  font-weight: 600;
+  text-align: right;
+  color: var(--text-color);
+}
+
+.student-card .student-details span {
+  text-align: left;
+  color: var(--text-color);
 }
 
 h1, h2, h3, h4 {
@@ -121,9 +138,9 @@ form {
 input {
   padding: 0.75rem;
   font-size: 1rem;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid #90E0EF;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(202, 240, 248, 0.5);
   color: var(--text-color);
   transition: border-color 0.2s;
 }
@@ -140,7 +157,7 @@ input:focus {
   border-radius: 12px;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
-  color: white;
+  color: #CAF0F8;
 }
 
 .btn-primary {
@@ -153,7 +170,7 @@ input:focus {
 
 .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(3, 4, 94, 0.2);
 }
 
 .btn:active {
@@ -171,13 +188,13 @@ input:focus {
 }
 
 .theme-toggle:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(202, 240, 248, 0.1);
 }
 
 .error-alert {
   display: none;
-  background: rgba(244, 67, 54, 0.8);
-  color: white;
+  background: rgba(3, 4, 94, 0.8); /* #03045E */
+  color: #CAF0F8;
   padding: 0.75rem;
   border-radius: 8px;
   margin-top: 0.5rem;
@@ -193,8 +210,8 @@ input:focus {
 }
 
 .spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-top: 4px solid var(--primary-color);
+  border: 4px solid #90E0EF;
+  border-top: 4px solid #00B4D8;
   border-radius: 50%;
   width: 30px;
   height: 30px;
@@ -212,7 +229,7 @@ input:focus {
 }
 
 .progress-bar {
-  background: rgba(0, 0, 0, 0.1);
+  background: #90E0EF;
   border-radius: 10px;
   overflow: hidden;
   height: 20px;
@@ -226,11 +243,11 @@ input:focus {
 }
 
 .progress-fill.low {
-  background: linear-gradient(90deg, #ff6b6b, #e17055);
+  background: #03045E;
 }
 
 .progress-fill.medium {
-  background: linear-gradient(90deg, #ff8e53, #f1c40f);
+  background: #0077B6;
 }
 
 .subject-card {
@@ -277,13 +294,22 @@ input:focus {
 }
 
 .circle-progress .bg {
-  stroke: rgba(0, 0, 0, 0.1);
+  stroke: #90E0EF;
 }
 
 .circle-progress .fg {
   stroke: url(#progressGradient);
   stroke-linecap: round;
   transition: stroke-dasharray 0.5s ease-in-out;
+}
+
+.circle-progress span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.8rem;
+  color: var(--text-color);
 }
 
 .subject-details {
@@ -301,7 +327,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 0.5rem;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(202, 240, 248, 0.3);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -309,11 +335,11 @@ table {
 th, td {
   padding: 0.75rem;
   text-align: left;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #90E0EF;
 }
 
 th {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(3, 4, 94, 0.05);
 }
 
 @media (max-width: 768px) {
@@ -334,9 +360,19 @@ th {
   .card {
     padding: 1rem;
   }
-  .student-card .avatar {
-    width: 40px;
-    height: 40px;
+  .student-card .profile-pic {
+    width: 60px;
+    height: 60px;
+  }
+  .student-card .student-details {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .student-card .student-details strong {
+    text-align: center;
+  }
+  .student-card .student-details span {
+    text-align: center;
   }
   .circle-progress {
     width: 50px;

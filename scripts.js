@@ -76,6 +76,7 @@ document.getElementById("loginForm")?.addEventListener("submit", async (e) => {
       return;
     }
     localStorage.setItem("token", data.token);
+    localStorage.setItem("username", username);
     window.location.href = "dashboard.html";
   } catch (err) {
     showError("error", "Server error: " + err.message);
@@ -87,12 +88,14 @@ document.getElementById("loginForm")?.addEventListener("submit", async (e) => {
 // Logout handler
 function logout() {
   localStorage.removeItem("token");
+  localStorage.removeItem("username");
   window.location.href = "index.html";
 }
 
 // Fetch and display student details and attendance summary
 async function loadAttendanceSummary() {
   const token = localStorage.getItem("token");
+  const username = localStorage.getItem("username");
   if (!token) {
     showError("error", "Please log in");
     return;
@@ -116,13 +119,20 @@ async function loadAttendanceSummary() {
       return;
     }
 
-    // Student Details
+    // Student Details with Profile Picture
     const studentEl = document.getElementById("studentDetails");
+    const profilePicEl = document.getElementById("profilePic");
+    if (username) {
+      profilePicEl.src = `https://erp.abes.ac.in/Services/ProfilePic.aspx?ID=${username}`;
+      profilePicEl.onerror = () => {
+        profilePicEl.src = "https://via.placeholder.com/80";
+      };
+    }
     studentEl.innerHTML = `
-      <p><strong>ID:</strong> ${data.studentId || "N/A"}</p>
-      <p><strong>Batch:</strong> ${data.batch || "N/A"}</p>
-      <p><strong>Section:</strong> ${data.section || "N/A"}</p>
-      <p><strong>Branch:</strong> ${data.branch || "N/A"}</p>
+      <strong>ID:</strong><span>${data.studentId || "N/A"}</span>
+      <strong>Batch:</strong><span>${data.batch || "N/A"}</span>
+      <strong>Section:</strong><span>${data.section || "N/A"}</span>
+      <strong>Branch:</strong><span>${data.branch || "N/A"}</span>
     `;
 
     // Attendance Summary
@@ -206,6 +216,8 @@ async function loadDetailedAttendance() {
                 const avgAttendance = totalPresent + totalAbsent > 0
                   ? Math.round((totalPresent / (totalPresent + totalAbsent)) * 100)
                   : 0;
+                const circumference = 2 * Math.PI * 16; // Circle radius = 16
+                const dashArray = (avgAttendance * circumference) / 100;
                 return `
                   <div class="subject-card" data-card-index="${index}">
                     <div class="subject-card-header">
@@ -214,13 +226,13 @@ async function loadDetailedAttendance() {
                         <svg viewBox="0 0 36 36">
                           <defs>
                             <linearGradient id="progressGradient${index}" x1="0%" y1="0%" x2="100%" y2="100%">
-                              <stop offset="0%" style="stop-color:#ff6b6b" />
-                              <stop offset="100%" style="stop-color:#00c4b4" />
+                              <stop offset="0%" style="stop-color:#0077B6" />
+                              <stop offset="100%" style="stop-color:#00B4D8" />
                             </linearGradient>
                           </defs>
                           <circle class="bg" cx="18" cy="18" r="16"></circle>
                           <circle class="fg" cx="18" cy="18" r="16"
-                            stroke-dasharray="${avgAttendance}, 100" stroke-dashoffset="0"></circle>
+                            stroke-dasharray="${dashArray}, ${circumference}" stroke-dashoffset="0"></circle>
                         </svg>
                         <span>${avgAttendance}%</span>
                       </div>
