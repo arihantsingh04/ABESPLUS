@@ -9,7 +9,7 @@ app.use(express.json());
 
 const BASE_URL = 'https://abes.platform.simplifii.com';
 
-// Add a handler for the root route
+// Root route
 app.get('/', (req, res) => {
   res.status(200).json({
     message: 'Welcome to the ABES Plus Proxy Server',
@@ -22,15 +22,17 @@ app.get('/', (req, res) => {
   });
 });
 
+// Login route (POST)
 app.post('/api/login', async (req, res) => {
   try {
     const response = await axios.post(`${BASE_URL}/api/v1/login`, req.body);
     res.json(response.data);
   } catch (error) {
-    res.status(500).json({ error: 'Login failed' });
+    res.status(500).json({ error: 'Login failed', details: error.message });
   }
 });
 
+// Attendance route (GET)
 app.get('/api/attendance', async (req, res) => {
   try {
     const response = await axios.get(`${BASE_URL}/api/v1/attendance`, {
@@ -38,10 +40,11 @@ app.get('/api/attendance', async (req, res) => {
     });
     res.json(response.data);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch attendance' });
+    res.status(500).json({ error: 'Failed to fetch attendance', details: error.message });
   }
 });
 
+// All Attendance route (GET)
 app.get('/api/all-attendance', async (req, res) => {
   try {
     const response = await axios.get(`${BASE_URL}/api/v1/all-attendance`, {
@@ -49,10 +52,11 @@ app.get('/api/all-attendance', async (req, res) => {
     });
     res.json(response.data);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch all attendance' });
+    res.status(500).json({ error: 'Failed to fetch all attendance', details: error.message });
   }
 });
 
+// Quiz route (GET)
 app.get('/api/quiz', async (req, res) => {
   try {
     const response = await axios.get(`${BASE_URL}/api/v1/quiz`, {
@@ -60,12 +64,21 @@ app.get('/api/quiz', async (req, res) => {
     });
     res.json(response.data);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch quiz data' });
+    res.status(500).json({ error: 'Failed to fetch quiz data', details: error.message });
   }
 });
 
-app.listen(3001, () => {
-  console.log('Proxy server running on port 3001');
+// Fallback route for undefined routes
+app.use((req, res) => {
+  res.status(404).json({
+    error: `Route ${req.method} ${req.url} not found`,
+    availableRoutes: [
+      '/api/login (POST)',
+      '/api/attendance (GET)',
+      '/api/all-attendance (GET)',
+      '/api/quiz (GET)',
+    ],
+  });
 });
 
 module.exports = app;
