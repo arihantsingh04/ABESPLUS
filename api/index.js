@@ -25,46 +25,80 @@ app.get('/', (req, res) => {
 // Login route (POST)
 app.post('/api/login', async (req, res) => {
   try {
-    const response = await axios.post(`${BASE_URL}/api/v1/login`, req.body);
+    const { username, password } = req.body;
+    const form = new URLSearchParams({ username, password });
+
+    const response = await axios.post(`${BASE_URL}/api/v1/admin/authenticate`, form.toString(), {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Origin': 'https://abes.web.simplifii.com',
+        'Referer': 'https://abes.web.simplifii.com/',
+      },
+    });
+
     res.json(response.data);
   } catch (error) {
-    res.status(500).json({ error: 'Login failed', details: error.message });
+    res.status(error.response?.status || 500).json({
+      error: 'Login failed',
+      details: error.response?.data || error.message,
+    });
   }
 });
 
 // Attendance route (GET)
 app.get('/api/attendance', async (req, res) => {
   try {
-    const response = await axios.get(`${BASE_URL}/api/v1/attendance`, {
-      headers: { Authorization: `Bearer ${req.headers.authorization}` },
+    const response = await axios.get(`${BASE_URL}/api/v1/admin/attendance`, {
+      headers: {
+        Authorization: `Bearer ${req.headers.authorization}`,
+        'Origin': 'https://abes.web.simplifii.com',
+        'Referer': 'https://abes.web.simplifii.com/',
+      },
     });
     res.json(response.data);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch attendance', details: error.message });
+    res.status(error.response?.status || 500).json({
+      error: 'Failed to fetch attendance',
+      details: error.response?.data || error.message,
+    });
   }
 });
 
 // All Attendance route (GET)
 app.get('/api/all-attendance', async (req, res) => {
   try {
-    const response = await axios.get(`${BASE_URL}/api/v1/all-attendance`, {
-      headers: { Authorization: `Bearer ${req.headers.authorization}` },
+    const response = await axios.get(`${BASE_URL}/api/v1/admin/all-attendance`, {
+      headers: {
+        Authorization: `Bearer ${req.headers.authorization}`,
+        'Origin': 'https://abes.web.simplifii.com',
+        'Referer': 'https://abes.web.simplifii.com/',
+      },
     });
     res.json(response.data);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch all attendance', details: error.message });
+    res.status(error.response?.status || 500).json({
+      error: 'Failed to fetch all attendance',
+      details: error.response?.data || error.message,
+    });
   }
 });
 
 // Quiz route (GET)
 app.get('/api/quiz', async (req, res) => {
   try {
-    const response = await axios.get(`${BASE_URL}/api/v1/quiz`, {
-      headers: { Authorization: `Bearer ${req.headers.authorization}` },
+    const response = await axios.get(`${BASE_URL}/api/v1/admin/quiz`, {
+      headers: {
+        Authorization: `Bearer ${req.headers.authorization}`,
+        'Origin': 'https://abes.web.simplifii.com',
+        'Referer': 'https://abes.web.simplifii.com/',
+      },
     });
     res.json(response.data);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch quiz data', details: error.message });
+    res.status(error.response?.status || 500).json({
+      error: 'Failed to fetch quiz data',
+      details: error.response?.data || error.message,
+    });
   }
 });
 
