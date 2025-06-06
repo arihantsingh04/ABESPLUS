@@ -1,14 +1,17 @@
+/* DARK THEME STYLED BASED ON YOUR MOCKUP */
 :root {
-  --bg-gradient: linear-gradient(135deg, #CAF0F8, #90E0EF);
-  --card-bg: rgba(202, 240, 248, 0.85); /* #CAF0F8 */
-  --text-color: #03045E;
-  --primary-color: #00B4D8;
-  --primary-gradient: linear-gradient(90deg, #0077B6, #00B4D8);
-  --danger-gradient: linear-gradient(90deg, #03045E, #0077B6);
-  --shadow: 0 6px 12px rgba(3, 4, 94, 0.15); /* #03045E */
-  --border-radius: 16px;
-  --glass-blur: blur(12px);
-  --progress-gradient: linear-gradient(90deg, #0077B6, #00B4D8);
+  --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --card-hover-bg: rgba(255, 255, 255, 0.08);
+  --text-color: #e0e0e0;
+  --text-light: #a0a0a0;
+  --accent-color: #00ffc3;
+  --accent-color-secondary: #7353ea;
+  --danger-color: #ff5e5e;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  --radius: 16px;
+  --font-main: 'Poppins', sans-serif;
 }
 
 [data-theme="dark"] {
@@ -26,19 +29,19 @@
   box-sizing: border-box;
 }
 
+
 body {
-  font-family: 'Poppins', sans-serif;
+  background: var(--bg-gradient);
+  font-family: var(--font-main);
+  color: var(--text-color);
   margin: 0;
   padding: 0;
-  background: var(--bg-gradient);
-  color: var(--text-color);
-  min-height: 100vh;
-  transition: background 0.3s, color 0.3s;
 }
+
 
 .glass-header {
   background: var(--card-bg);
-  backdrop-filter: var(--glass-blur);
+  backdrop-filter: blur(10px);
   padding: 1rem 2rem;
   position: sticky;
   top: 0;
